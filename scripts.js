@@ -2,6 +2,33 @@
 function ageInMonths(age){
     return age * 12;
 }
+
+//Run when page loads
+window.onload = function() {
+    let storedName = localStorage.getItem('name')
+    let storedAge = localStorage.getItem('age')
+
+    //Personalized greeting
+    if (storedName && storedAge) {
+        document.querySelector('#greetings').textContent = `Hey there ${storedName}, Thank you for stopping over!`
+
+        // Check if the user is old enough to access adult content
+        if (storedAge < 18) {
+    document.querySelector('#adultContent').textContent = ` You are not old enough to access adult content.`;
+} else{
+    document.querySelector('#adultContent').textContent = ` You are old enough to access adult content.`;
+}
+
+    //Display the user's age in months
+    document.querySelector('#ageInMonths').textContent = `Your age in months is ${ageInMonths(storedAge)}`;
+
+    //Inspirational quote
+    let quote = 'The best way to predict the future is to create it.';
+for (let i = 0; i < 5; i++) {
+    document.querySelector('#quote').textContent += quote + '\n';
+}
+    }
+}
 // Handling form submission and storing data in localStorage
 let form = document.querySelector('form');
 
@@ -15,8 +42,10 @@ form.addEventListener('submit', function(e) {
 
     let storedName = localStorage.getItem('name');
     let storedAge = localStorage.getItem('age');
+
 //Personalized greeting
 document.querySelector('#greetings').textContent = `Hey there ${storedName}, Thank you for stopping over!`;
+
 // Check if the user is old enough to access adult content
 if (storedAge < 18) {
     document.querySelector('#adultContent').textContent = ` You are not old enough to access adult content.`;
@@ -29,6 +58,6 @@ document.querySelector('#ageInMonths').textContent = `Your age in months is ${ag
 //Inspirational quote
 let quote = 'The best way to predict the future is to create it.';
 for (let i = 0; i < 5; i++) {
-    document.querySelector('#quote').textContent += quote;
+    document.querySelector('#quote').textContent += quote + '\n';
 }
 });
